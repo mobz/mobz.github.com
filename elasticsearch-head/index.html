@@ -11,25 +11,30 @@
   </header>
   
   <section>
-   <h1>What is this?</h1>
-   <p><em>elasticserach-head</em> is a web front end for browsing and interacting with an <a href="http://www.elasticsearch.com/">Elastic Search</a> cluster.</p>
-   <h1>Gettings Started</h1>
+   <h2>What is this?</h2>
+   <p><em>elasticsearch-head</em> is a web front end for browsing and interacting with an <a href="http://www.elasticsearch.com/">Elastic Search</a> cluster.</p>
+   <h2>Gettings Started</h2>
    <p>
     <ol>
 	 <li><code>git clone git://github.com/mobz/elasticsearch-head.git</code></li>
 	 <li>Open <tt>index.html</tt> in a browser. A modern browser is required to use es-head</li>
-	 <li>By default es-head attempts to connect to a node at <tt>http://localhost:9200/</tt>. Enter a different node address in the connect box and click 'Connect'</li>
+	 <li>By default es-head will immediately attempt to connect to a cluster node at <tt>http://localhost:9200/</tt>.<br>
+		Enter a different node address in the connect box and click 'Connect' if required.</li>
 	</ol>
    </p>
-   <h1>General Utility</h1>
+   <h2>General Utility</h2>
    <p>es-head has a three major operations.
    <ul>
     <li>A couple of search interfaces that allow you to query the cluster a retrieve results in raw json or tabular format</li>
 	<li>Several quick access tabs that show the status of the cluster</li>
-	<li>An input section that allows arbitrary call to the RESTful API to be made.</li>
+	<li>An input section that allows arbitrary call to the RESTful API to be made.<span style="color: red;">* caution *, you can destroy and corrupt data from this interface if you are not careful</span></li>
    </ul>
-   <h1>Screenshot time!</h1>
+   <p>es-head will attempt to remember the node that it connects to using html5 features, however this only works over http(s).<br>
+		If you would like to create a link to a particular cluster use the url form <tt>.../elasticsearch-head/index.html?base_uri=<i>http://cluster.example.com:9200/</i></tt>
+   <h2>Screenshot time!</h2>
    <p>
+    <img src="screenshots/structquery.png" alt="Screenshot of elasticsearch-head showing the structured query">
+    <img src="screenshots/browser.png" alt="Screenshot of elasticsearch-head showing the browser">
     <img src="screenshots/nodestats.png" alt="Screenshot of elasticsearch-head showing the node stats page">
    </p>
   </section>
