@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 
 <html>
- <head>
-  <title>ElasticSearch Head</title>
- </head>
+	<head>
+		<title>ElasticSearch Head</title>
+		<style>
+			BODY { font-family: sans-serif; }
+		</style>
+	</head>
  
  <body>
   <header>
@@ -13,6 +16,8 @@
   <section>
    <h2>What is this?</h2>
    <p><em>elasticsearch-head</em> is a web front end for browsing and interacting with an <a href="http://www.elasticsearch.com/">Elastic Search</a> cluster.</p>
+   <p><a href="https://github.com/mobz/elasticsearch-head">elasticsearch-head</a> is hosted and can be downloaded or forked at github</p>
+   <p>contact me via github or on twitter @mobz</p>
    <h2>Gettings Started</h2>
    <p>
     <ol>
@@ -27,7 +32,16 @@
    <ul>
     <li>A couple of search interfaces that allow you to query the cluster a retrieve results in raw json or tabular format</li>
 	<li>Several quick access tabs that show the status of the cluster</li>
-	<li>An input section that allows arbitrary call to the RESTful API to be made.<span style="color: red;">* caution *, you can destroy and corrupt data from this interface if you are not careful</span></li>
+	<li>An input section that allows arbitrary call to the RESTful API to be made. This interface includes several options that can be combined to produce interesting results;
+		<ul>
+			<li>Select request method (get, put, post, delete), json query data, node, and path</li> 
+			<li>JSON validator</li>
+			<li>Ability to repeat requests on a timer</li>
+			<li>Ability to transform the result using javascript expressions</li>
+			<li>Ability to collect results over time (using timer), or compare results</li>
+			<li>Ability to chart the transformed results in a simple bar graph (including time series)</li>
+		</ul>
+		<span style="color: red;">* caution *, you can destroy and corrupt data from this interface if you are not careful</span></li>
    </ul>
    <p>es-head will attempt to remember the node that it connects to using html5 features, however this only works over http(s).<br>
 		If you would like to create a link to a particular cluster use the url form <tt>.../elasticsearch-head/index.html?base_uri=<i>http://cluster.example.com:9200/</i></tt>
