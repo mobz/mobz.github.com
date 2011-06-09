@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+ <head>
+  <title>NoHtml</title>
+  <link rel="stylesheet" href="fathom.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <script src="jquery-nohtml.js"></script>
+  <script src="fathom.js"></script>
+  <script>
+  $(function() {
+	for(var slides = new Array(21), i = 0; i < slides.length; i++) {
+		slides[i] = "Slide" + ( i + 1 ) + ".PNG";
+	};
+	$({ tag: "DIV", children: slides.map(function(s) {
+		return { tag: "DIV", cls: "slide", child: { tag: "IMG", src: s } };
+	}) }).appendTo("body").fathom();
+  });
+  </script>
+ </head>
+ 
+ <body></body>
+</html>
