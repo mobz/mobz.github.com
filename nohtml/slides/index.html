@@ -9,12 +9,10 @@
   <script src="fathom.js"></script>
   <script>
   $(function() {
-	for(var slides = new Array(21), i = 0; i < slides.length; i++) {
-		slides[i] = "Slide" + ( i + 1 ) + ".PNG";
-	};
-	$({ tag: "DIV", children: slides.map(function(s) {
-		return { tag: "DIV", cls: "slide", child: { tag: "IMG", src: s } };
-	}) }).appendTo("body").fathom();
+	for(var slides = [], i = 1; i <= 21; i++) {
+		slides.push({ tag: "DIV", cls: "slide", child: { tag: "IMG", src: "Slide" + i + ".PNG" } });
+	}
+	$({ tag: "DIV", children: slides }).appendTo("body").fathom();
   });
   </script>
  </head>
