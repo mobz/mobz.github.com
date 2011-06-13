@@ -1,21 +1,105 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 
 <html>
- <head>
-  <title>NoHtml</title>
-  <link rel="stylesheet" href="fathom.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script src="jquery-nohtml.js"></script>
-  <script src="fathom.js"></script>
-  <script>
-  $(function() {
-	for(var slides = [], i = 1; i <= 21; i++) {
-		slides.push({ tag: "DIV", cls: "slide", child: { tag: "IMG", src: "Slide" + i + ".PNG" } });
-	}
-	$({ tag: "DIV", children: slides }).appendTo("body").fathom();
-  });
-  </script>
- </head>
- 
- <body></body>
+	<head>
+		<title>NoHtml</title> 
+	  <link rel="stylesheet" href="fathom.css">
+		<style>
+		#container {
+			position: fixed;
+			bottom: 10px;
+			left: 10px;
+			z-index: 10;
+			border: 5px solid black;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			-webkit-box-shadow: 0 0 10px black;
+			-moz-box-shadow: 0 0 10px black;
+			box-shadow: 0 0 10px black;
+			
+		}
+		#container IFRAME {
+			display: block;
+		}
+		</style>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script src="jquery-nohtml.js"></script>
+		<script src="fathom.js"></script>
+    <script src="http://a.vimeocdn.com/js/froogaloop2.min.js?66409"></script> 
+		<script>
+		var times = [ { t: 0, s: 1 },	{ t: 10, s: 2 }, { t: 31, s: 3 }, { t: 42, s: 4 }, { t: 55, s: 5 }, { t: 88, s: 6 }, { t: 180, s: 7 }, { t: 217, s: 8 }, { t: 250, s: 9 }, { t: 302, s: 10 }, { t: 325, s: 11 }, { t: 360, s: 12 }, { t: 399, s: 13 }, { t: 435, s: 14 }, { t: 473, s: 15 }, { t: 526, s: 17 }, { t: 576, s: 18 }, { t: 636, s: 20 }, { t: 683, s: 21 }, { t: 745, s: 16 }, { t: 815, s: 7 }, { t: 934, s: 2 }, { t: 100000, s: 1 } ];
+		var currentSlide = 0;
+		function checkTime(t) {
+			for(var i = 0; i < times.length; i++) {
+				if(times[i].t <= t && times[i+1].t > t) {
+					var mySlide = times[i].s;
+					break;
+				}
+			}
+			if(currentSlide !== mySlide) {
+				window.fathom.scrollToSlide(window.slides.eq(mySlide - 1));
+				currentSlide = mySlide;
+			}
+		}
+		
+			Function.prototype.bind = function(cx) {
+				var fn = this;
+				return function() {
+					fn.apply(cx, Array.prototype.slice.call(arguments));
+				}
+			}
+		
+			function Vimeo(video, parent, onready ) {
+				var frame = $( this._frame_template( video ) ).appendTo( parent );
+				$f( frame[0] ).addEvent( 'ready', function (player_id) {
+					this.v = $f(player_id); 
+					onready && onready.call(this, this);
+				}.bind(this) );
+			}
+
+			Vimeo.prototype = {
+				play: function() {
+					this.v.api("play");
+				},
+
+				_frame_template: function( v ) {
+					return {
+						tag: "IFRAME", id: "p" + v,
+						width: "360", height: "203", frameborder: "0",
+						src: "http://player.vimeo.com/video/" + v + "?api=1&player_id=p" + v
+					};
+				}
+			};
+		$(function() {
+			$({ tag: "DIV", id: "container" }).appendTo("body");
+			new Vimeo("24919623", "#container", function(video) {
+				var timer = false;
+				video.v.addEvent('play', function(data) {
+					if(timer === false) {	
+						timer = setInterval(function() {
+							video.v.api('getCurrentTime', function (value, player_id) {
+								checkTime(value);
+							});
+						}, 500);
+					}
+				});
+				video.v.addEvent('pause', function(data) {
+					clearInterval(timer);
+					timer = false;
+				});
+				video.play();
+			});
+		})
+	  $(function() {
+			for(var slides = [], i = 1; i <= 21; i++) {
+				slides.push({ tag: "DIV", cls: "slide", child: { tag: "IMG", src: "Slide" + i + ".PNG" } });
+			}
+			window.fathom = new Fathom( $({ tag: "DIV", children: slides }).appendTo("body") );
+			window.slides = $(".slide");
+	  });
+		</script>
+	</head> 
+
+	<body></body> 
 </html>
