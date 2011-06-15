@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+ <head>
+  <title>NoHtml</title>
+  <link rel="stylesheet" href="fathom.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <script src="jquery-nohtml.js"></script>
+  <script src="fathom.js"></script>
+  <script>
+  $(function() {
+	for(var slides = [], i = 1; i <= 21; i++) {
+		slides.push({ tag: "DIV", cls: "slide", child: { tag: "IMG", src: "Slide" + i + ".PNG" } });
+	}
+	$({ tag: "DIV", children: slides }).appendTo("body").fathom();
+  });
+  </script>
+ </head>
+ 
+ <body></body>
+</html>
