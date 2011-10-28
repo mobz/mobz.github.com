@@ -18,14 +18,20 @@
    <p><em>elasticsearch-head</em> is a web front end for browsing and interacting with an <a href="http://www.elasticsearch.com/">Elastic Search</a> cluster.</p>
    <p><a href="https://github.com/mobz/elasticsearch-head">elasticsearch-head</a> is hosted and can be downloaded or forked at github</p>
    <p>contact me via github or on twitter @mobz</p>
-   <h2>Gettings Started</h2>
-   <p>
-    <ol>
-	 <li><code>git clone git://github.com/mobz/elasticsearch-head.git</code></li>
-	 <li>Open <tt>index.html</tt> in a browser. A modern browser is required to use es-head</li>
-	 <li>By default es-head will immediately attempt to connect to a cluster node at <tt>http://localhost:9200/</tt>.<br>
+   <h2>Installing and Running</h2>
+   <p>There are two ways of running and installing elasticsearch-head</p>
+		<h3>Running as a plugin of ElasticSearch (this is the preferred method)</h3>
+			<ol>
+				<li><code>elasticsearch/bin/plugin -install mobz/elasticsearch-head</code></li>
+				<li><code>open http://localhost:9200/_plugin/head/</code></li>
+			</ol>
+		<h3>Running as a standalone webapp</h3>
+			<ol>
+				<li><code>git clone git://github.com/mobz/elasticsearch-head.git</code></li>
+				<li>Open <tt>index.html</tt> in a browser. A modern browser is required to use es-head</li>
+				<li>By default es-head will immediately attempt to connect to a cluster node at <tt>http://localhost:9200/</tt>.<br>
 		Enter a different node address in the connect box and click 'Connect' if required.</li>
-	</ol>
+		</ol>
    </p>
    <h2>General Utility</h2>
    <p>es-head has a three major operations.
