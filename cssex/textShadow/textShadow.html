@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>CSS3 Effects</title>
+		<style>
+BODY {
+	margin: 10px;
+	font-family: Arial Black, sans-serif;
+	font-size: 80px;
+	text-align: center;
+}
+#a {
+	color: white;
+	text-shadow: 3px 3px 3px #000;
+}
+
+#b {
+	color: transparent;
+	-webkit-background-clip: text;
+	background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 30%, #700 50%, rgba(0, 0, 0, 0) 75%);
+	text-shadow: 0px 6px 6px rgba( 0, 0, 0, 0.3), 0px -6px 6px rgba( 0, 0, 0, 0.3);
+}
+
+#c {
+	color: rgba( 255, 255, 255, 0.14);
+	text-shadow: 0px 0px 20px rgba( 0, 0, 0, 1);
+	-webkit-text-stroke: 1px rgba( 255, 255, 255, 0.17);
+}
+
+#d {
+	color: transparent;
+	text-shadow: -6px -6px 6px rgba( 255, 0, 0, 1),
+							0px 0px 6px rgba( 0, 255, 0, 1),
+							6px 6px 6px rgba( 0, 0, 255, 1);
+}
+
+#e {
+	color: transparent;
+	-webkit-background-clip: text;
+	background-color: #888;
+	text-shadow: -3px -3px 3px rgba( 255, 255, 255, 0.5), 0px -7px 3px rgba( 255, 255, 255, 0.8);
+}
+
+#f {
+	color: transparent;
+	text-shadow: 0px 0px 17px rgba( 255, 255, 255, 1), 0px 0px 22px rgba( 0, 0, 0, 1);
+}
+
+#g {
+	color: rgba(0, 120, 0, 0.25);
+	text-shadow: 0 26px 26px rgba(0, 0, 0, 0.25),
+								0 22px 22px rgba(0, 20, 0, 0.25),
+								0 18px 18px rgba(0, 40, 0, 0.25),
+								0 14px 14px rgba(0, 60, 0, 0.25),
+								0 10px 10px rgba(0, 80, 0, 0.25),
+								0 6px 6px rgba(0, 100, 0, 0.25),
+								0 2px 2px rgba(0, 120, 0, 0.25);
+}
+
+		</style>
+	</head>
+	
+	<body>
+		<div contenteditable="true" id="a">Shadow Me!</div>
+		<div contenteditable="true" id="e">Shadow Me!</div>
+		<div contenteditable="true" id="f">Shadow Me!</div>
+		<div contenteditable="true" id="b">Shadow Me!</div>
+		<div contenteditable="true" id="d">Shadow Me!</div>
+		<div contenteditable="true" id="c">Shadow Me!</div>
+		<div contenteditable="true" id="g">Shadow Me!</div>
+	</body>
+</html>

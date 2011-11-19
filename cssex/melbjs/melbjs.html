@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>MelbJS</title>
+		<style>
+BODY {
+	background-color: rgb( 20, 114, 188);
+	background-image: -webkit-linear-gradient( top, rgb(98, 180, 244), rgb(20, 114, 188));
+	background-repeat: no-repeat;
+	height: 100%;
+	padding: 0;
+	margin: 30px 0 0;
+}
+.melbjs-logo {
+	margin: 0 auto;
+	width: 1000px;
+	height: 276px;
+	background: rgb( 67, 122, 198);
+	-webkit-background-clip: border-box;
+	border: 2px solid rgba( 255, 255, 255, 0.5);
+	font-family: HeadlineA, sans-serif;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 287px;
+	position: relative;
+}
+
+.melbjs-logo > DIV {
+	-webkit-transition: opacity 2s ease-out;
+	opacity: 1;
+	position: absolute;
+	color: transparent;
+	height: 276px;
+}
+
+.melbjs-logo > DIV > SPAN {
+	-webkit-transition: all 2s ease-out;
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%;
+}
+
+.melbjs-logo > DIV:first-child {
+	left: 0;
+	width: 648px;
+	background: -webkit-linear-gradient(45deg, #4388d3, #63aeed);
+}
+
+.melbjs-logo > DIV:last-child {
+	width: 348px;
+	right: 0;
+}
+
+.melbjs-logo > DIV > SPAN:first-child {
+	text-shadow: 3.6px 4.5px 3.6px rgba( 0, 0, 0, 0.38);
+}
+
+.melbjs-logo > DIV > SPAN:last-child {
+	-webkit-text-stroke: 2px rgba( 255, 255, 255, 0.5);
+	-webkit-background-clip: text;
+	background-image: -webkit-linear-gradient(top, #fff 30%, #999 90%);
+	text-shadow: 0 0 8px rgba(0, 0, 0, 0);
+}
+
+.melbjs-logo.start > DIV {
+	opacity: 0;
+}
+
+.melbjs-logo.start > DIV > SPAN {
+	-webkit-transform: translate( 0px, -300px );
+}
+
+.melbjs-logo.start > DIV > SPAN:first-child {
+	text-shadow: 3.6px 304.5px 80px rgba( 0, 0, 0, 0.0);
+}
+
+.melbjs-logo.flat > DIV > SPAN:last-child {
+	-webkit-text-stroke: 0px rgba( 255, 255, 255, 0);
+	-webkit-transform: translate( 3.6px, 4.5px );
+	text-shadow: 0 0 0 rgba(0, 0, 0, .3);
+}
+
+		</style>
+		<script>
+		$ = function( selector ) { return document.querySelector( selector ); };
+		HTMLElement.prototype.removeClass = function( cls ) {
+			this.className = this.className.replace( new RegExp("\\s?\\b" + cls + "\\b"), "");
+		};
+		HTMLElement.prototype.addClass = function( cls ) {
+			this.className = this.className + " " + cls;
+		}
+
+		window.setTimeout( function() {
+			var melbjs = $(".melbjs-logo");
+			melbjs.removeClass("start");
+			window.setTimeout( function() {
+				melbjs.removeClass("flat");
+			}, 2000);
+		}, 100);
+		</script>
+	</head>
+	<body>
+		<div class="melbjs-logo start flat"><div><span>Melb</span><span>Melb</span></div><div><span>JS</span><span>JS</span></div></div>
+	</body>
+</html>
