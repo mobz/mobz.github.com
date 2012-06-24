@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>DOMj Fiddle</title>
+		<style>
+			BODY { font-family: sans-serif; margin: 10px; }
+			H1 { font-size: 20px; }
+			#i {
+				font-family: monospace;
+			}
+			#i, #o {
+				font-size: 14px;
+				padding: 10px;
+				width: 100%;
+				border: 1px solid black;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+		</style>
+		<script src="src/joey.js"></script>
+		<script>
+		setTimeout( function() {
+			var i = document.getElementById("i");
+			var o = document.getElementById("o");
+			function render() {
+				var val = i.value;
+				try {
+					var el = joey( eval( "(" + i.value + ")" ) );
+					while( o.firstChild ) {
+						o.removeChild( o.firstChild);
+					}
+					o.appendChild( el );
+				} catch( e ) { console.log( e ); }
+			}
+			i.addEventListener("keyup", render);
+			render();
+		}, 10);
+		</script>
+	</head>
+
+	<body>
+		<h1>DOMj</h1>
+		<textarea id="i" rows="16" cols="90">
+{ tag: "DIV", id: "foo", children: [
+  "Just some text",
+  { tag: "INPUT", type: "text", value: "this is an input" },
+  { tag: "A", href: "https://github.com/mobz/domj", text: "this is a link" },
+  { tag: "BUTTON", type: "button", onclick: function() { alert( "hello" ); }, text: "this is a button" },
+  { tag: "UL", children: [ "Apple", "Berry", "Cherry", "Donut" ].map( function( fruit ) {
+    return { tag: "LI", text: fruit };
+  } ) }
+] }
+		</textarea>
+		<h1>Result</h1>
+		<div id="o"></div>
+	</body>
+</html>
