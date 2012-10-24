@@ -6,6 +6,8 @@
 		<style>
 			BODY { font-family: sans-serif; margin: 10px; }
 			H1 { font-size: 20px; }
+			H1 SPAN { padding-left: 4em; font-size: 12px; color: black; }
+			#error { font-size: 10px; color: red; }
 			#i {
 				font-family: monospace;
 			}
@@ -24,6 +26,7 @@
 		setTimeout( function() {
 			var i = document.getElementById("i");
 			var o = document.getElementById("o");
+			var result = document.getElementById("result");
 			function render() {
 				var val = i.value;
 				try {
@@ -32,28 +35,32 @@
 						o.removeChild( o.firstChild);
 					}
 					o.appendChild( el );
-				} catch( e ) { console.log( e ); }
+					result.style.color = "green";
+				} catch( ex ) {
+					result.style.color = "red";
+					console.log( ex );
+				}
 			}
 			i.addEventListener("keyup", render);
 			render();
+			i.focus();
 		}, 10);
 		</script>
 	</head>
 
 	<body>
-		<h1>DOMj</h1>
-		<textarea id="i" rows="16" cols="90">
+		<h1>DOMj<span>Updated as you type</span></h1>
+		<textarea id="i" rows="20" cols="70">
 { tag: "DIV", id: "foo", children: [
   "Just some text",
-  { tag: "INPUT", type: "text", value: "this is an input" },
-  { tag: "A", href: "https://github.com/mobz/domj", text: "this is a link" },
-  { tag: "BUTTON", type: "button", onclick: function() { alert( "hello" ); }, text: "this is a button" },
-  { tag: "UL", children: [ "Apple", "Berry", "Cherry", "Donut" ].map( function( fruit ) {
+  { tag: "INPUT", type: "text", value: "an input" },
+  { tag: "A", href: "https://github.com/mobz/domj", text: "a link" },
+  { tag: "BUTTON", type: "button", onclick: function() { alert( "hello" ); }, text: "a button" },
+  { tag: "UL", children: [ "apple", "berry", "cherry", "donut" ].map( function( fruit ) {
     return { tag: "LI", text: fruit };
   } ) }
-] }
-		</textarea>
-		<h1>Result</h1>
+] }</textarea>
+		<h1 id="result">Result</h1>
 		<div id="o"></div>
 		<a href="https://github.com/mobz/joey"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 	</body>

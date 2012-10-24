@@ -1,27 +1,23 @@
 (function() {
 
 	var global = this;
-	
-	function lower( name ) {
-		return name.replace(/^[A-Z]/, function(a) { return a.toLowerCase(); });
-	}
+	var shortcuts = {
+		"text" : "textContent",
+		"cls" : "className"
+	};
 
 	function addAttr( el, attr, value, context ) {
-		if( attr === 'text' ) {
-			el.appendChild( context.createTextNode( value ) );
-		} else if( attr === 'children' ) {
+		attr = shortcuts[attr] || attr;
+		if( attr === 'children' ) {
 			for( var i = 0; i < value.length; i++) {
-				var newNode = createNode( value[i], el, context );
-				if( newNode ) {
-					el.appendChild( newNode );
-				}
+				createNode( value[i], el, context );
 			}
 		} else if( attr === 'style' || attr === 'dataset' ) {
 			for( var prop in value ) {
 				el[ attr ][ prop ] = value[ prop ];
 			}
-		} else if( attr.indexOf("on") === 0 && ( typeof value === 'function' ) ) {
-			el.addEventListener( lower( attr.substr(2) ), value, false );
+		} else if( attr.indexOf("on") === 0 ) {
+			el.addEventListener( attr.substr(2), value, false );
 		} else {
 			el[ attr ] = value;
 		}
@@ -30,13 +26,11 @@
 	function createNode( obj, parent, context ) {
 		var el, attr;
 		if( obj == null ) {
-			el = undefined;
+			return;
 		} else if( typeof obj === 'string' ) {
 			el = context.createTextNode( obj );
-		} else if( obj.nodeType === 1 ) {
-			el = obj;
 		} else {
-			el = context.createElement( obj.tag || 'DIV' );
+			el = context.createElement( obj.tag || obj.tagName || 'DIV' );
 			for( attr in obj ) {
 				addAttr( el, attr, obj[ attr ], context );
 			}
@@ -48,8 +42,7 @@
 	};
 
 	global.joey = function joey(elementDef, parentNode) {
-		return createNode( elementDef, parentNode, (parentNode && parentNode.ownerDocument) || global.document );
+		return createNode( elementDef, parentNode, parentNode ? parentNode.ownerDocument : global.document );
 	};
 
 }());
-
