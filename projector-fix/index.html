@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>ProjectorFix</title>
+		<style>
+		BODY { font-family: Futura, sans-serif; }
+		BODY, .content, .link { padding: 0; margin: 0; top: 0; left: 0; right: 0; bottom: 0; position: absolute; }
+		.content { background-image: url('bg.jpg'); background-size: cover; background-position: 50% 50%; }
+		.link { margin: auto; width: 300px; height: 50px; background: white; text-align: center; line-height: 50px; }
+		CITE { bottom: 0; right: 0; position: absolute; color: #ccc; font-size: 10px; }
+		</style>
+	</head>
+
+	<body>
+		<div class="content">
+			<div class="link"><a id="bookmarklet" href="javascript:void()">ProjectorFix</a> (drag link to toolbar)</div>
+			<cite>Photo Credit: <a href="http://www.flickr.com/photos/horrgakx/4079639219/">Dave Wilson Cumbria</a></cite>
+		</div>
+		<script>
+			var src = function() {
+				var b = document.body;
+				function create( html, styles, event, fn, parent ) {
+					var d = document.createElement( "DIV" );
+					d.innerHTML = html;
+					Object.keys(styles).forEach( function(s) { d.style[s] = styles[s]; });
+					d.addEventListener( event, fn, false );
+					parent.appendChild( d );
+					return d;
+				}
+				if( window["projector-fix"] ) {
+					b.removeChild( window["projector-fix"] );
+					delete window["projector-fix"];
+				} else {
+					var filterDim = { "hue-rotate":"deg","contrast":"%","saturate":"%","brightness":"%" };
+					var filters = { "hue-rotate": 0, "contrast": 100, "saturate": 100, "brightness": /Chrome/.test(navigator.userAgent) ? 100 : 0 };
+					var filterHtml = Object.keys( filters ).map( function(filter) {
+						return filter + ":" + '<input type="range" style="width:100px" min="-100" max="360" name="' + filter + '" value="' + filters[filter] + '">';
+					}).join(" ");
+					window["projector-fix"] = create( filterHtml, {
+						top: 0,left:0,right:0,position:"absolute",margin:"0 5%","z-index":10000,
+						border:"2px solid #555",background:"#888",padding:"2px","border-radius":"0 0 4px 4px","border-top-width":0,
+						color:"white","font-size":"15px","text-align": "center"
+					}, "change", function( event ) {
+						console.log( event );
+						filters[ event.target.name ] = event.target.value;
+						filterCss = Object.keys( filters ).map( function( filter ) { return filter + "(" + filters[ filter ] + filterDim[ filter ] + ")"; } ).join(" ");
+						["filter","MozFilter","WebkitFilter"].forEach( function( n ) { b.style[n] = filterCss; } );
+					}, document.body );
+				}
+			};
+			document.getElementById("bookmarklet")[ "href" ] = "javascript:(" + src.toString() + ")()";
+		</script>
+	</body>
+</html>
