@@ -45,8 +45,8 @@
 						console.log( event );
 						filters[ event.target.name ] = event.target.value;
 						filterCss = Object.keys( filters ).map( function( filter ) { return filter + "(" + filters[ filter ] + filterDim[ filter ] + ")"; } ).join(" ");
-						["filter","MozFilter","WebkitFilter"].forEach( function( n ) { b.style[n] = filterCss; } );
-					}, document.body );
+						["filter","MozFilter","WebkitFilter"].forEach( function( n ) { b.parentElement.style[n] = filterCss; } );
+					}, b );
 				}
 			};
 			document.getElementById("bookmarklet")[ "href" ] = "javascript:(" + src.toString() + ")()";
